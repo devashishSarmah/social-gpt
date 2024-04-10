@@ -139,6 +139,54 @@
         }
       },
       "defaultConfiguration": "production"
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "apps/social-network/.storybook",
+        "browserTarget": "social-network:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/social-network",
+        "configDir": "apps/social-network/.storybook",
+        "browserTarget": "social-network:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c apps/social-network/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "social-network:build-storybook",
+        "staticFilePath": "dist/storybook/social-network",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "social-network:build-storybook:ci"
+        }
+      }
     }
   }
 }
