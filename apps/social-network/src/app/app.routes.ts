@@ -1,13 +1,14 @@
 import { Route } from '@angular/router';
 
 export const routesMap = {
-    AUTH: 'auth'
+    AUTH: 'auth',
+    HOME: ''
 }
 
 export const appRoutes: Route[] = [
     {
         path: '',
-        redirectTo: routesMap.AUTH,
+        loadChildren: () => import('./pages/home/home.routes').then(m => m.HomeRoutes),
         pathMatch: 'full'
     },
     {
