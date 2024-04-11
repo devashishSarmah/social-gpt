@@ -8,6 +8,12 @@ import { provideRouter } from '@angular/router';
         path: '',
         loadComponent: () =>
           import('./home.component').then((c) => c.HomeComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./modules/feed/feed.component').then(c => c.FeedComponent)
+          }
+        ]
       },
     ]),
   ],

@@ -1,1 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+    @apply dark:bg-charcoal bg-off-white h-full w-full;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+p, li {
+    @apply dark:text-off-white-text text-charcoal;
+}
+
+.page {
+    @apply w-full h-full p-3 pt-32;
+}
+
+.dot-seperated-list {
+    @apply leading-4;
+    .dot-seperated-list-item {
+        @apply inline-block relative pe-7 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-3 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600 text-xs opacity-80 font-medium;
+    }
+}
+
+
+
+
+.dropdown-item {
+    div {
+        @apply flex items-center;
+    }
+    span, i {
+        @apply text-xs font-semibold;
+    }
+}

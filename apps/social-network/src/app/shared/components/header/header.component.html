@@ -1,0 +1,37 @@
+<div
+  class="p-2 dark:bg-gunmetal bg-seasalt flex items-center justify-between h-24 fixed w-full"
+>
+  <div class="flex items-center">
+    <img
+      [src]="
+        'https://res.cloudinary.com/dmm7pipxt/image/upload/q_auto,w_64,h_64/v1712730853/social/assets/social.png'
+      "
+    />
+  </div>
+  <div class="hs-dropdown">
+    <button
+      type="button"
+      class="hs-dropdown-toggle flex items-center"
+    >
+      <img
+        [src]="
+          'https://res.cloudinary.com/dmm7pipxt/image/upload/r_max/w_48/h_48/v1712745737/social/samples/profile.webp'
+        "
+      />
+      <div class="ml-3">
+        <p class="text-sm font-semibold">John Doe</p>
+      </div>
+    </button>
+
+    <ul
+      class="z-[1] bg-isabelline dark:bg-raisin-black p-3 rounded-lg hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-40 mt-2"
+    >
+      <li class="dropdown-item">
+        <div>
+          <span class="material-symbols-outlined">logout</span
+          ><span class="ml-2">Sign out</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

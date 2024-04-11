@@ -21,7 +21,8 @@
           "apps/social-network/src/assets"
         ],
         "styles": ["apps/social-network/src/styles.scss"],
-        "scripts": []
+        "scripts": ["node_modules/preline/preline.js"],
+        "statsJson": true
       },
       "configurations": {
         "production": {
