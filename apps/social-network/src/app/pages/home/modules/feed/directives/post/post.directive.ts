@@ -1,45 +1,59 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Input, ElementRef } from '@angular/core';
 
 @Directive({
   selector: '[appPost]',
   standalone: true,
 })
-export class PostDirective<T = unknown> {
-  private _context: PostContext<T> = new PostContext<T>();
+export class PostDirective {
+  private _text!: string;
 
-  constructor(
-    private containerRef: ViewContainerRef,
-    private templateRef: TemplateRef<PostContext<T>>
-  ) {}
+  constructor(private elementRef: ElementRef) {}
 
   /**
    * Get the post as a text. Parse it and generate a HTML template to display in formatted manner.
+   * If there are more than 125 characters, append ```view more```
    */
   @Input()
-  set appPost(text: T) {
-    this._context.$implicit = this._context.post = text;
-    this._updateView();
-  }
+  set appPost(text: string) {
+    let exceededCharacterLimit = false;
 
-  private _updateView() {
-    this.containerRef.clear();
-    if (this._context.$implicit) {
-      const formattedPost = (this._context.$implicit as string).replace(/(#\w+)/g, '<span class="text-charcoal">$1</span>');
-      this._context.fPost = <any>`<div>${formattedPost}</div>`;
-      this.containerRef.createEmbeddedView(this.templateRef, this._context);
-      console.log(this.templateRef, this.containerRef);
+    text = text.trim();
+    this._text = text;
+    if (text) {
+      if (text.length > 125) {
+        exceededCharacterLimit = true;
+        text = this._text.slice(0, 125);
+      }
+
+      this.setText(text, exceededCharacterLimit);
     }
   }
 
-  static ngTemplateGuard_appPost: 'binding';
+  private setText(text: string, appendViewMoreBtn = false) {
+    text = text.trim();
+    let formattedPost = text.replace(
+      /(#\w+)/g,
+      '<span class="text-charcoal font-semibold">$1</span>'
+    );
 
-  static ngTemplateContextGuard<T>(dir: PostDirective<T>, ctx: any): ctx is PostContext<Exclude<T, false | 0 | '' | null | undefined>> {
-    return true;
+    if (appendViewMoreBtn) {
+      formattedPost += `... <span class="view-more cursor-pointer opacity-60">more</span>`;
+    }
+
+    (
+      this.elementRef.nativeElement as HTMLElement
+    ).innerHTML = `<div>${formattedPost}</div>`;
+
+    if (appendViewMoreBtn) {
+      (this.elementRef.nativeElement as HTMLElement)
+        .querySelector('.view-more')
+        ?.addEventListener('click', () => {
+          (this.elementRef.nativeElement as HTMLElement)
+            .querySelector('.view-more')
+            ?.remove();
+
+          this.setText(this._text);
+        });
+    }
   }
-}
-
-export class PostContext<T = unknown> {
-  public $implicit: T = null!;
-  public post: T = null!;
-  public fPost: T = null!;
 }

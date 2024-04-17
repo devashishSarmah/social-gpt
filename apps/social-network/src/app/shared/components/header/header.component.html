@@ -3,20 +3,22 @@
 >
   <div class="flex items-center">
     <img
-      [src]="
-        'https://res.cloudinary.com/dmm7pipxt/image/upload/q_auto,w_64,h_64/v1712730853/social/assets/social.png'
-      "
+      [ngSrc]="'v1712730853/social/assets/social.png'"
+      width="64"
+      height="64"
+      priority
     />
   </div>
   <div class="hs-dropdown">
-    <button
-      type="button"
-      class="hs-dropdown-toggle flex items-center"
-    >
+    <button type="button" class="hs-dropdown-toggle flex items-center">
       <img
-        [src]="
-          'https://res.cloudinary.com/dmm7pipxt/image/upload/r_max/w_48/h_48/v1712745737/social/samples/profile.webp'
+        [ngSrc]="
+          'v1712745737/social/samples/profile.webp'
         "
+        width="48"
+        height="48"
+        priority
+        [loaderParams]="{ rounded: true }"
       />
       <div class="ml-3">
         <p class="text-sm font-semibold">John Doe</p>

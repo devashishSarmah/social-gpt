@@ -8,20 +8,28 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/social-network/browser",
         "index": "apps/social-network/src/index.html",
         "main": "apps/social-network/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/social-network/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/social-network/src/favicon.ico",
           "apps/social-network/src/assets"
         ],
-        "styles": ["apps/social-network/src/styles.scss"],
-        "scripts": ["node_modules/preline/preline.js"],
+        "styles": [
+          "apps/social-network/src/styles.scss"
+        ],
+        "scripts": [
+          "node_modules/preline/preline.js"
+        ],
         "statsJson": true
       },
       "configurations": {
@@ -46,7 +54,13 @@
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/social-network/src/environments/environment.ts",
+              "with": "apps/social-network/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -74,7 +88,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/social-network/jest.config.ts"
       }
@@ -88,7 +104,9 @@
       }
     },
     "server": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "executor": "@angular-devkit/build-angular:server",
       "options": {
         "outputPath": "dist/apps/social-network/server",
@@ -105,7 +123,13 @@
           "optimization": false,
           "sourceMap": true,
           "extractLicenses": false,
-          "vendorChunk": true
+          "vendorChunk": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/social-network/src/environments/environment.ts",
+              "with": "apps/social-network/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -127,7 +151,9 @@
     "prerender": {
       "executor": "@angular-devkit/build-angular:prerender",
       "options": {
-        "routes": ["/"]
+        "routes": [
+          "/"
+        ]
       },
       "configurations": {
         "development": {
@@ -157,7 +183,9 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputDir}"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
       "options": {
         "outputDir": "dist/storybook/social-network",
         "configDir": "apps/social-network/.storybook",

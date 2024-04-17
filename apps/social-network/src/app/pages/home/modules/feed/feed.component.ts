@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { PostDirective } from './directives/post/post.directive';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, PostDirective],
+  imports: [CommonModule, PostDirective, NgOptimizedImage],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss',
 })
